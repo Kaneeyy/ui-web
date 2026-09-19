@@ -510,7 +510,7 @@ const Dashboard: React.FC = () => {
 
 
   return (
-    <div className="flex h-screen overflow-hidden bg-background text-white font-sans selection:bg-white/20">
+    <div className="flex h-screen overflow-hidden text-white font-sans selection:bg-white/20" style={{ background: 'radial-gradient(circle at 76% 12%, rgba(99,102,241,.12), transparent 30%), radial-gradient(circle at 12% 65%, rgba(99,102,241,.06), transparent 26%), #0a0a0a' }}>
       
       <div className="fixed bottom-6 right-6 z-[200] flex flex-col gap-3 pointer-events-none">
         {toasts.map(t => (
@@ -643,7 +643,7 @@ const Dashboard: React.FC = () => {
 
       
       <main className="flex-1 flex flex-col overflow-hidden relative z-10">
-        <header className="h-16 border-b border-border bg-background/50 backdrop-blur-md flex items-center justify-between px-6 sticky top-0 z-20">
+        <header className="h-16 border-b border-white/[0.08] flex items-center justify-between px-6 sticky top-0 z-20" style={{ background: 'rgba(17,17,25,.62)', backdropFilter: 'blur(22px)', WebkitBackdropFilter: 'blur(22px)' }}>
           <div className="ml-10 md:ml-0 flex items-center gap-4 flex-1">
             <div className="w-64">
               <CustomSelect
@@ -1413,7 +1413,7 @@ const Dashboard: React.FC = () => {
       
 
       {showOnboarding && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-background/95 backdrop-blur-xl animate-fade-in">
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 backdrop-blur-xl animate-fade-in" style={{ background: 'rgba(10,10,10,.92)' }}>
           <div className="bg-surface border border-white/10 rounded-[40px] p-12 max-w-xl text-center shadow-2xl animate-scale-up relative overflow-hidden group">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
             <div className="relative z-10">

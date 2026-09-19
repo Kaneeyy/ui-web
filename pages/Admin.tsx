@@ -135,7 +135,7 @@ const Admin: React.FC = () => {
   if (loading) return <div className="h-screen flex items-center justify-center"><Loader2 className="animate-spin" /></div>;
 
   return (
-    <div className="flex h-screen bg-background text-white">
+    <div className="flex h-screen text-white" style={{ background: 'radial-gradient(circle at 76% 12%, rgba(99,102,241,.12), transparent 30%), radial-gradient(circle at 12% 65%, rgba(99,102,241,.06), transparent 26%), #0a0a0a' }}>
       
       <aside className="w-64 bg-surface border-r border-border p-6 flex flex-col">
         <div className="flex items-center gap-2 font-black text-xl mb-12">

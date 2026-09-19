@@ -685,7 +685,7 @@ const ResellerPortal: React.FC = () => {
     );
 
     return (
-        <div className="flex h-screen overflow-hidden bg-background text-white font-sans selection:bg-white/20">
+        <div className="flex h-screen overflow-hidden text-white font-sans selection:bg-white/20" style={{ background: 'radial-gradient(circle at 76% 12%, rgba(99,102,241,.12), transparent 30%), radial-gradient(circle at 12% 65%, rgba(99,102,241,.06), transparent 26%), #0a0a0a' }}>
             <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.05]" style={{ 
                 backgroundImage: 'linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px)', 
                 backgroundSize: '50px 50px' 
@@ -769,7 +769,7 @@ const ResellerPortal: React.FC = () => {
                 </button>
             </aside>
 
-            <main className="flex-1 p-8 overflow-y-auto bg-background relative z-10">
+            <main className="flex-1 p-8 overflow-y-auto relative z-10" style={{ background: 'radial-gradient(circle at 76% 12%, rgba(99,102,241,.08), transparent 40%), #0a0a0a' }}>
                 <header className="flex justify-between items-center mb-8">
                     <h1 className="text-3xl font-black uppercase tracking-tight text-white">
                         {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Manager

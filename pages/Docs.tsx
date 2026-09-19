@@ -278,7 +278,7 @@ const EndpointCard: React.FC<{ ep: Endpoint; baseUrl: string }> = ({ ep, baseUrl
                 onClick={() => setOpen(o => !o)}
                 className="w-full flex items-center gap-4 p-5 text-left hover:bg-white/[0.03] transition-colors"
             >
-                <span className="shrink-0 px-3 py-1 text-[10px] font-black tracking-widest uppercase rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                <span className="shrink-0 px-3 py-1 text-[10px] font-black tracking-widest uppercase rounded-md border" style={{ background: 'rgba(99,102,241,.1)', color: '#a5b4fc', borderColor: 'rgba(99,102,241,.25)' }}>
                     {ep.method}
                 </span>
                 <code className="text-sm font-mono text-white/70 bg-white/5 px-3 py-1 rounded-lg">{ep.path}</code>
@@ -292,9 +292,9 @@ const EndpointCard: React.FC<{ ep: Endpoint; baseUrl: string }> = ({ ep, baseUrl
                     <p className="text-muted text-sm leading-relaxed">{ep.desc}</p>
 
                     {ep.beginner && (
-                        <div className="flex gap-3 p-4 bg-blue-500/5 border border-blue-500/15 rounded-xl">
-                            <BookOpen size={16} className="text-blue-400 mt-0.5 shrink-0" />
-                            <p className="text-blue-300/80 text-sm leading-relaxed">{ep.beginner}</p>
+                        <div className="flex gap-3 p-4 rounded-xl border" style={{ background: 'rgba(99,102,241,.05)', borderColor: 'rgba(99,102,241,.15)' }}>
+                            <BookOpen size={16} className="mt-0.5 shrink-0" style={{ color: '#a5b4fc' }} />
+                            <p className="text-sm leading-relaxed" style={{ color: 'rgba(165,180,252,.8)' }}>{ep.beginner}</p>
                         </div>
                     )}
 
@@ -346,7 +346,7 @@ const EndpointCard: React.FC<{ ep: Endpoint; baseUrl: string }> = ({ ep, baseUrl
                                 <Globe size={12} /> Example Request (JavaScript)
                             </h4>
                             <div className="relative group/code">
-                                <pre className="bg-[#0d0d0f] border border-white/[0.06] rounded-xl p-4 text-xs font-mono text-white/80 overflow-x-auto leading-relaxed">
+                                <pre className="bg-[#0e0e12] border border-white/[0.06] rounded-xl p-4 text-xs font-mono text-white/80 overflow-x-auto leading-relaxed">
                                     <code>{ep.example}</code>
                                 </pre>
                                 <button
@@ -425,7 +425,7 @@ if (success) {
                     <div className="flex-1 min-w-0 space-y-3">
                         <h3 className="font-black text-white">{item.title}</h3>
                         <p className="text-muted text-sm leading-relaxed">{item.desc}</p>
-                        <pre className="bg-[#0d0d0f] border border-white/[0.06] rounded-xl p-4 text-xs font-mono text-white/70 overflow-x-auto leading-relaxed">
+                        <pre className="bg-[#0e0e12] border border-white/[0.06] rounded-xl p-4 text-xs font-mono text-white/70 overflow-x-auto leading-relaxed">
                             <code>{item.code}</code>
                         </pre>
                     </div>
@@ -433,10 +433,10 @@ if (success) {
             ))}
         </div>
 
-        <div className="p-5 bg-blue-500/5 border border-blue-500/20 rounded-2xl flex gap-4">
-            <Shield className="text-blue-300 shrink-0 mt-0.5" size={18} />
+        <div className="p-5 rounded-2xl flex gap-4 border" style={{ background: 'rgba(99,102,241,.05)', borderColor: 'rgba(99,102,241,.2)' }}>
+            <Shield className="shrink-0 mt-0.5" size={18} style={{ color: '#a5b4fc' }} />
             <div>
-                <p className="font-bold text-blue-200 text-sm mb-2">SDK security note</p>
+                <p className="font-bold text-sm mb-2" style={{ color: '#c7d2fe' }}>SDK security note</p>
                 <p className="text-muted text-sm leading-relaxed mb-3">
                     Hardened SDK builds send <code className="bg-white/5 px-1 rounded text-white/80">clientNonce</code> and <code className="bg-white/5 px-1 rounded text-white/80">clientTimestamp</code>.
                     SDK auth endpoints return <code className="bg-white/5 px-1 rounded text-white/80">requestNonce</code>, <code className="bg-white/5 px-1 rounded text-white/80">serverTimestamp</code>, and <code className="bg-white/5 px-1 rounded text-white/80">signature</code>.
@@ -444,7 +444,7 @@ if (success) {
                 <p className="text-muted text-sm leading-relaxed mb-3">
                     Embed this verification key in your client SDK:
                 </p>
-                <pre className="bg-[#0d0d0f] border border-white/[0.06] rounded-xl p-4 text-xs font-mono text-white/70 overflow-x-auto leading-relaxed">
+                <pre className="bg-[#0e0e12] border border-white/[0.06] rounded-xl p-4 text-xs font-mono text-white/70 overflow-x-auto leading-relaxed">
                     <code>{SDK_PUBLIC_KEY_SNIPPET}</code>
                 </pre>
             </div>
@@ -477,16 +477,16 @@ const Docs: React.FC = () => {
     const activeCatInfo = CATEGORIES.find(c => c.id === activeCategory);
 
     return (
-        <div className="min-h-screen bg-background text-white flex flex-col selection:bg-white/10">
+        <div className="min-h-screen text-white flex flex-col selection:bg-white/10" style={{ background: 'radial-gradient(circle at 76% 12%, rgba(99,102,241,.15), transparent 30%), radial-gradient(circle at 12% 65%, rgba(99,102,241,.08), transparent 26%), #0a0a0a' }}>
             
-            <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.04]"
-                style={{ backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '48px 48px' }} />
+            <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.06]"
+                style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px)', backgroundSize: '72px 72px' }} />
 
             
-            <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/[0.06] backdrop-blur-xl bg-background/80">
+            <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/[0.08] backdrop-blur-2xl" style={{ background: 'rgba(17,17,25,.62)' }}>
                 <div className="max-w-[88rem] mx-auto px-6 h-16 flex items-center justify-between gap-4">
                     <Link to="/" className="flex items-center gap-2.5 group shrink-0">
-                        <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center group-hover:rotate-12 transition-all shadow-lg shadow-white/10">
+                        <div className="w-9 h-9 rounded-xl flex items-center justify-center group-hover:rotate-6 transition-all" style={{ background: 'linear-gradient(145deg,#fff,#c9caff)', boxShadow: '0 0 20px rgba(99,102,241,.4)' }}>
                             <Shield className="text-black" size={18} />
                         </div>
                         <span className="font-black tracking-tight text-lg">KCA <span className="text-muted font-light">Docs</span></span>
@@ -515,10 +515,9 @@ const Docs: React.FC = () => {
                     fixed lg:sticky top-16 left-0 lg:left-auto
                     z-40 lg:z-auto
                     w-64 h-[calc(100vh-4rem)]
-                    flex-col border-r border-white/[0.06]
-                    bg-background lg:bg-transparent
+                    flex-col border-r border-white/[0.08]
                     p-5 overflow-y-auto custom-scrollbar shrink-0
-                `}>
+                `} style={{ background: 'rgba(17,17,25,.42)', backdropFilter: 'blur(20px)' }}>
                     <p className="text-[9px] font-black uppercase tracking-[0.2em] text-muted/40 mb-4 ml-1 px-1">Navigation</p>
                     <nav className="space-y-0.5 flex-1">
                         {CATEGORIES.map(cat => (
@@ -527,7 +526,7 @@ const Docs: React.FC = () => {
                                 onClick={() => { setActiveCategory(cat.id); setMobileSidebarOpen(false); }}
                                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 text-sm text-left
                                     ${activeCategory === cat.id
-                                        ? 'bg-white text-black font-bold shadow-lg shadow-white/5'
+                                        ? 'bg-white text-black font-bold'
                                         : 'text-muted hover:text-white hover:bg-white/[0.05] font-medium'
                                     }`}
                             >

@@ -18,6 +18,7 @@ const Signup: React.FC = () => {
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!auth) return;
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) navigate('/dashboard');
     });
@@ -44,7 +45,7 @@ const Signup: React.FC = () => {
     }
 
     try {
-      const res = await createUserWithEmailAndPassword(auth, email, password);
+      const res = await createUserWithEmailAndPassword(auth!, email, password);
 
       if (res.user) {
         const secret = 'KCA-' + Math.random().toString(36).substring(2, 15).toUpperCase();
@@ -81,7 +82,7 @@ const Signup: React.FC = () => {
     }
 
     try {
-      const res = await signInWithPopup(auth, provider);
+      const res = await signInWithPopup(auth!, provider);
 
       if (res.user && res.user.email) {
         const emailKey = res.user.email.replace(/\./g, ',');
@@ -112,62 +113,52 @@ const Signup: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center relative overflow-x-hidden overflow-y-auto bg-background selection:bg-white/20">
-      
-      <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 opacity-[0.07]" style={{ backgroundImage: 'linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px)', backgroundSize: '50px 50px' }}></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
-        <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-white opacity-[0.02] blur-[120px] rounded-full animate-pulse-slow"></div>
-        <div className="absolute bottom-[-20%] right-[-10%] w-[400px] h-[400px] bg-blue-500 opacity-[0.03] blur-[100px] rounded-full animate-pulse-slow delay-1000"></div>
-      </div>
-
-      <div className="w-full max-w-md px-4 py-12 relative z-20 animate-fade-in-up my-auto">
-        <Link to="/" className="inline-flex items-center text-sm text-muted hover:text-white mb-8 transition-colors">
+    <div className="g3d-auth-bg">
+      <div className="w-full max-w-md px-4 py-12 relative z-10 my-auto">
+        <Link to="/" className="inline-flex items-center text-sm text-white/50 hover:text-white mb-8 transition-colors">
           <ArrowLeft className="mr-2" size={16} /> Back to Home
         </Link>
 
-        <div className="bg-surface border border-border rounded-2xl p-8 shadow-2xl relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-50"></div>
-
+        <div className="g3d-auth-card">
           <div className="text-center mb-8">
-            <h1 className="text-2xl font-bold mb-2">Create Account</h1>
-            <p className="text-muted text-sm">Start building securely today.</p>
+            <h1 className="text-2xl font-bold mb-2 text-white">Create Account</h1>
+            <p className="text-white/50 text-sm">Start building securely today.</p>
           </div>
 
-          {error && <div className="bg-red-500/10 border border-red-500/20 text-red-500 text-sm p-3 rounded-lg mb-6 text-center animate-fade-in">{error}</div>}
+          {error && <div className="g3d-auth-error">{error}</div>}
 
           <form onSubmit={handleSignup} className="space-y-5">
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-muted block ml-1">Email</label>
-              <div className="relative group">
-                <input name="email" type="email" required placeholder="name@example.com" className="w-full bg-surfaceHighlight border border-border rounded-xl px-4 py-3.5 text-white placeholder-muted/50 focus:outline-none focus:border-white/50 focus:bg-surface transition-all duration-300 pl-11" />
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-muted group-focus-within:text-white transition-colors" size={18} />
+            <div>
+              <label className="g3d-auth-label">Email</label>
+              <div className="relative">
+                <input name="email" type="email" required placeholder="name@example.com" className="g3d-auth-input" />
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" size={18} />
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-muted block ml-1">Password</label>
-                <div className="relative group">
-                  <input name="password" type="password" required placeholder="••••••••" className="w-full bg-surfaceHighlight border border-border rounded-xl px-4 py-3.5 text-white placeholder-muted/50 focus:outline-none focus:border-white/50 focus:bg-surface transition-all duration-300 pl-11" />
-                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-muted group-focus-within:text-white transition-colors" size={18} />
+              <div>
+                <label className="g3d-auth-label">Password</label>
+                <div className="relative">
+                  <input name="password" type="password" required placeholder="••••••••" className="g3d-auth-input" />
+                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" size={18} />
                 </div>
               </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-muted block ml-1">Confirm</label>
-                <div className="relative group">
-                  <input name="confirm" type="password" required placeholder="••••••••" className="w-full bg-surfaceHighlight border border-border rounded-xl px-4 py-3.5 text-white placeholder-muted/50 focus:outline-none focus:border-white/50 focus:bg-surface transition-all duration-300 pl-11" />
-                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-muted group-focus-within:text-white transition-colors" size={18} />
+              <div>
+                <label className="g3d-auth-label">Confirm</label>
+                <div className="relative">
+                  <input name="confirm" type="password" required placeholder="••••••••" className="g3d-auth-input" />
+                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" size={18} />
                 </div>
               </div>
             </div>
 
             <div className="flex items-start gap-2 mt-2">
               <label className="flex items-start gap-3 cursor-pointer group select-none">
-                <div onClick={() => setAgree(!agree)} className={`w-4 h-4 rounded-sm border transition-all flex items-center justify-center mt-1 ${agree ? 'bg-white border-white' : 'border-border bg-surfaceHighlight'}`}>
+                <div onClick={() => setAgree(!agree)} className={`w-4 h-4 rounded-sm border transition-all flex items-center justify-center mt-1 ${agree ? 'bg-white border-white' : 'border-white/20 bg-white/5'}`}>
                   {agree && <div className="w-1.5 h-1.5 bg-black" />}
                 </div>
-                <span className="text-xs text-muted leading-relaxed">
+                <span className="text-xs text-white/50 leading-relaxed">
                   I agree to the <Link to="/tos" className="text-white hover:underline">Terms of Service</Link> and <Link to="#" className="text-white hover:underline">Privacy Policy</Link>.
                 </span>
               </label>
@@ -175,18 +166,18 @@ const Signup: React.FC = () => {
 
             <Turnstile onVerify={setTurnstileToken} onExpire={() => setTurnstileToken(null)} />
 
-            <button disabled={loading || !agree || !turnstileToken} type="submit" className="w-full bg-white text-black font-bold py-3.5 rounded-xl hover:bg-gray-200 transition-all active:scale-[0.98] flex justify-center items-center mt-4">
-              {loading ? <Loader2 className="animate-spin" /> : 'Create Account'}
+            <button disabled={loading || !agree || !turnstileToken} type="submit" className="g3d-auth-btn mt-4">
+              {loading ? <Loader2 className="animate-spin mx-auto" /> : 'CREATE ACCOUNT'}
             </button>
           </form>
 
-          <div className="relative my-8">
-            <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-border" /></div>
-            <div className="relative flex justify-center text-xs uppercase"><span className="bg-surface px-2 text-muted">Or continue with</span></div>
+          <div className="g3d-auth-divider">
+            <div className="g3d-auth-divider-line" />
+            <div className="g3d-auth-divider-text"><span>OR CONTINUE WITH</span></div>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            <button onClick={() => socialLogin(new GoogleAuthProvider())} className="bg-surfaceHighlight border border-border text-white font-medium py-3 rounded-xl hover:bg-surfaceHighlight/80 transition-all flex items-center justify-center gap-2">
+            <button onClick={() => socialLogin(new GoogleAuthProvider())} className="g3d-auth-social">
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
                 <path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
@@ -195,31 +186,26 @@ const Signup: React.FC = () => {
               </svg>
               Google
             </button>
-            <button onClick={() => socialLogin(new GithubAuthProvider())} className="bg-surfaceHighlight border border-border text-white font-medium py-3 rounded-xl hover:bg-surfaceHighlight/80 transition-all flex items-center justify-center gap-2">
+            <button onClick={() => socialLogin(new GithubAuthProvider())} className="g3d-auth-social">
               <Github size={20} /> GitHub
             </button>
           </div>
 
-          <p className="text-center mt-8 text-sm text-muted">
+          <p className="text-center mt-8 text-sm text-white/50">
             Already have an account? <Link to="/login" className="text-white font-medium hover:underline">Login</Link>
           </p>
         </div>
       </div>
+
       {showSuccess && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in">
-          <div className="w-full max-w-sm glass rounded-2xl p-8 text-center animate-slide-up relative">
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/50 to-transparent"></div>
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" style={{ animation: 'g3d-fade .3s ease' }}>
+          <div className="w-full max-w-sm glass p-8 text-center relative" style={{ animation: 'g3d-rise .4s ease', borderRadius: 30 }}>
             <div className="w-20 h-20 bg-success/20 rounded-full flex items-center justify-center mx-auto mb-6">
               <CheckCircle2 className="text-success" size={40} />
             </div>
-            <h2 className="text-2xl font-bold mb-2">Account Created!</h2>
-            <p className="text-muted mb-8 leading-relaxed">Your account has been created and successfully linked to Discord.</p>
-            <button
-              onClick={() => navigate('/dashboard')}
-              className="w-full py-3.5 bg-white text-black font-bold rounded-xl hover:bg-gray-200 transition-all active:scale-[0.98]"
-            >
-              Enter Dashboard
-            </button>
+            <h2 className="text-2xl font-bold mb-2 text-white">Account Created!</h2>
+            <p className="text-white/50 mb-8 leading-relaxed">Your account has been created and successfully linked to Discord.</p>
+            <button onClick={() => navigate('/dashboard')} className="g3d-auth-btn">ENTER DASHBOARD</button>
           </div>
         </div>
       )}
