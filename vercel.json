@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/(login|register|versioncheck|get_free_key|license|isapplicationpaused|getvariable|getvariables|create_user|delete_user|reset_hwid|create_license|delete_license)",
+      "destination": "/api/index.js"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
