@@ -46,6 +46,11 @@ const App: React.FC = () => {
   const [maintenance, setMaintenance] = useState<SystemConfig | null>(null);
 
   useEffect(() => {
+    if (!auth) {
+      setLoading(false);
+      return;
+    }
+
     const unsubscribeAuth = onAuthStateChanged(auth, (u) => {
       if (u?.email === 'reseller@gmail.com') {
         setUser(null);
@@ -56,10 +61,13 @@ const App: React.FC = () => {
       setLoading(false);
     });
 
-    const maintenanceRef = ref(db, 'system/config');
-    const unsubscribeMaintenance = onValue(maintenanceRef, (snapshot) => {
-      setMaintenance(snapshot.val());
-    });
+    let unsubscribeMaintenance: () => void = () => {};
+    if (db) {
+      const maintenanceRef = ref(db, 'system/config');
+      unsubscribeMaintenance = onValue(maintenanceRef, (snapshot) => {
+        setMaintenance(snapshot.val());
+      });
+    }
 
     return () => {
       unsubscribeAuth();
